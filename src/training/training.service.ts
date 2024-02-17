@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import * as moment from 'moment-timezone';
+import { Repository } from 'typeorm';
+import { PERCENTAGES } from '../shared/constants';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UpdateTrainingDto } from './dto/update-training.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Training } from './entities/training.entity';
 
 @Injectable()
@@ -13,16 +15,20 @@ export class TrainingService {
   ) {}
 
   async createTraining(createTrainingDto: CreateTrainingDto) {
-    console.log('createTrainingDto', createTrainingDto);
     createTrainingDto.players.forEach(async (player) => {
-      const speed =
-        +player.stats[0].speed.distance / +player.stats[0].speed.time;
+      const speed = this.caluclateSpeed(
+        +player.stats[0].speed.distance,
+        +player.stats[0].speed.time,
+      );
 
-      player.stats[0].speedCalculated = String(speed);
-      player.score =
-        +player.stats[0].speedCalculated *
-        +player.stats[0].power *
-        +player.stats[0].passes;
+      player.score = this.calculateScore(
+        +player.stats[0].power,
+        speed,
+        +player.stats[0].passes,
+      );
+
+      const today = moment().utc().format('YYYY-MM-DD');
+      player.created_at = today;
 
       const normalizedPlayer = {
         player_id: player.id,
@@ -35,7 +41,7 @@ export class TrainingService {
   }
 
   findAll() {
-    return `This action returns all training`;
+    return `This action all trainings`;
   }
 
   findOne(id: number) {
@@ -50,8 +56,17 @@ export class TrainingService {
     return `This action removes a #${id} training`;
   }
 
-  calculateSpeed(distance: string, time: string) {
-    const speed = +distance / +time;
-    return speed;
+  private caluclateSpeed(distance: number, time: number) {
+    return distance / time;
+  }
+
+  private calculateScore(power: number, speed: number, passes: number) {
+    return Number(
+      (
+        power * PERCENTAGES.POWER +
+        speed * PERCENTAGES.SPEED +
+        passes * PERCENTAGES.PASSES
+      ).toFixed(2),
+    );
   }
 }

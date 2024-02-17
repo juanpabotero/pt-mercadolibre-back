@@ -2,6 +2,7 @@ import { Type } from 'class-transformer';
 import {
   ArrayNotEmpty,
   IsArray,
+  IsDate,
   IsNotEmpty,
   IsNumber,
   IsObject,
@@ -40,7 +41,11 @@ export class PLayerDto {
   @IsOptional()
   @IsNumber()
   @IsPositive()
-  score: number;
+  score?: number;
+
+  @IsOptional()
+  @IsDate()
+  created_at?: string;
 }
 
 export class SpeedDto {
@@ -64,9 +69,9 @@ export class StatsDto {
   @Type(() => SpeedDto)
   speed: SpeedDto;
 
-  @IsString()
-  @IsOptional()
-  speedCalculated: string;
+  // @IsString()
+  // @IsOptional()
+  // speedCalculated: string;
 
   @IsNotEmpty()
   @IsString()

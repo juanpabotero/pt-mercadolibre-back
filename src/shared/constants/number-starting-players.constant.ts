@@ -1,0 +1,1 @@
+export const NUMBER_STARTING_PLAYERS = 5;
