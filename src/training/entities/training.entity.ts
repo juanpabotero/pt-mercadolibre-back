@@ -1,6 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Stat } from '../interfaces/player.interface';
 import { Player } from 'src/players/entities/player.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Stat } from '../interfaces/player.interface';
 
 @Entity('training')
 export class Training {

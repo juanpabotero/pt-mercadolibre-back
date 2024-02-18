@@ -1,15 +1,6 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import { TrainingService } from './training.service';
+import { Body, Controller, Post } from '@nestjs/common';
 import { CreateTrainingDto } from './dto/create-training.dto';
-import { UpdateTrainingDto } from './dto/update-training.dto';
+import { TrainingService } from './training.service';
 
 @Controller('training')
 export class TrainingController {
@@ -18,28 +9,5 @@ export class TrainingController {
   @Post()
   createTraining(@Body() createTrainingDto: CreateTrainingDto) {
     return this.trainingService.createTraining(createTrainingDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.trainingService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.trainingService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateTrainingDto: UpdateTrainingDto,
-  ) {
-    return this.trainingService.update(+id, updateTrainingDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.trainingService.remove(+id);
   }
 }

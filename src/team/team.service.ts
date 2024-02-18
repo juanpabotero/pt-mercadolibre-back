@@ -1,11 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as moment from 'moment-timezone';
+import { Repository } from 'typeorm';
 import { NUMBER_STARTING_PLAYERS } from '../shared/constants';
 import { Training } from '../training/entities/training.entity';
-import { Repository } from 'typeorm';
-import { CreateTeamDto } from './dto/create-team.dto';
-import { UpdateTeamDto } from './dto/update-team.dto';
 
 @Injectable()
 export class TeamService {
@@ -13,10 +11,6 @@ export class TeamService {
     @InjectRepository(Training)
     private trainingRepository: Repository<Training>,
   ) {}
-
-  create(createTeamDto: CreateTeamDto) {
-    return 'This action adds a new team';
-  }
 
   async getTeam() {
     const firstDayOfweek = moment().startOf('isoWeek').format('YYYY-MM-DD');
@@ -32,8 +26,6 @@ export class TeamService {
       .groupBy('created_at, training_id')
       .orderBy('created_at', 'DESC')
       .getRawMany();
-
-    console.log('training', training);
 
     if (training.length < 3) {
       return { message: 'There is not enough information' };
@@ -53,8 +45,6 @@ export class TeamService {
       .orderBy('created_at', 'DESC')
       .getRawMany();
 
-    console.log('players', players);
-
     const playersScores = {};
 
     if (!players || players.length < 0) {
@@ -69,8 +59,6 @@ export class TeamService {
       }
     });
 
-    console.log('playersScores', playersScores);
-
     const playersAverage = {};
 
     for (const key in playersScores) {
@@ -83,36 +71,21 @@ export class TeamService {
       playersAverage[key] = sum;
     }
 
-    console.log('playersAverage', playersAverage);
-
     const topPlayers = Object.keys(playersAverage)
       .sort((a, b) => playersAverage[b] - playersAverage[a])
       .slice(0, NUMBER_STARTING_PLAYERS);
-
-    console.log('topPlayers', topPlayers);
 
     const topPlayersData = [];
 
     topPlayers.forEach((playerId) => {
       let playerData = players.find((p) => p.id === +playerId);
-      playerData.score = playersAverage[playerId];
+      playerData.score = +playersAverage[playerId].toFixed(2);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { count, created_at, id, ...rest } = playerData;
       playerData = { id: Number(id), ...rest };
       topPlayersData.push(playerData);
     });
 
     return { players: topPlayersData };
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} team`;
-  }
-
-  update(id: number, updateTeamDto: UpdateTeamDto) {
-    return `This action updates a #${id} team`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} team`;
   }
 }

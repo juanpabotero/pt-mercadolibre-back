@@ -5,7 +5,6 @@ import { PlayersService } from 'src/players/players.service';
 import { Repository } from 'typeorm';
 import { PERCENTAGES } from '../shared/constants';
 import { CreateTrainingDto } from './dto/create-training.dto';
-import { UpdateTrainingDto } from './dto/update-training.dto';
 import { Training } from './entities/training.entity';
 
 @Injectable()
@@ -37,31 +36,11 @@ export class TrainingService {
         ...player,
       });
 
-      // if (playerFound.training) {
-      //   playerFound.training = [...playerFound.training, newTraining];
-      // }
-
       playerFound.training?.push(newTraining);
 
       await this.trainingRepository.save(newTraining);
     });
     return { message: 'Training created successfully' };
-  }
-
-  findAll() {
-    return `This action all trainings`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} training`;
-  }
-
-  update(id: number, updateTrainingDto: UpdateTrainingDto) {
-    return `This action updates a #${id} training`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} training`;
   }
 
   private calculateSpeed(distance: number, time: number) {

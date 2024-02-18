@@ -15,11 +15,9 @@ export class PlayersService {
     const player = await this.playerRepository.findOne({
       where: { name: createPlayerDto.name },
     });
-
     if (player) {
       throw new HttpException('Player already exists', HttpStatus.CONFLICT);
     }
-
     const newPlayer = this.playerRepository.create(createPlayerDto);
 
     return this.playerRepository.save(newPlayer);
