@@ -1,23 +1,24 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Stat } from '../interfaces/player.interface';
+import { Player } from 'src/players/entities/player.entity';
 
 @Entity('training')
 export class Training {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'numeric', nullable: true })
-  player_id: number;
+  @Column({ type: 'uuid', nullable: true })
+  training_id: string;
 
-  @Column({ type: 'text' })
-  name: string;
-
-  @Column('timestamp', { default: () => 'CURRENT_TIMESTAMP' })
+  @Column('date', { default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
 
-  @Column('text', { array: true })
+  @Column('jsonb', { nullable: true })
   stats: Stat[];
 
   @Column({ type: 'numeric', default: 0 })
   score: number;
+
+  @ManyToOne(() => Player, (player) => player.training)
+  player: Player;
 }

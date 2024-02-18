@@ -69,10 +69,6 @@ export class StatsDto {
   @Type(() => SpeedDto)
   speed: SpeedDto;
 
-  // @IsString()
-  // @IsOptional()
-  // speedCalculated: string;
-
   @IsNotEmpty()
   @IsString()
   passes: string;

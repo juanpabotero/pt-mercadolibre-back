@@ -1,8 +1,8 @@
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
-import { CreatePlayerDto } from './dto/create-player.dto';
-import { UpdatePlayerDto } from './dto/update-player.dto';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreatePlayerDto } from './dto/create-player.dto';
+import { UpdatePlayerDto } from './dto/update-player.dto';
 import { Player } from './entities/player.entity';
 
 @Injectable()
@@ -20,9 +20,7 @@ export class PlayersService {
       throw new HttpException('Player already exists', HttpStatus.CONFLICT);
     }
 
-    const newPlayer = this.playerRepository.create({
-      name: createPlayerDto.name,
-    });
+    const newPlayer = this.playerRepository.create(createPlayerDto);
 
     return this.playerRepository.save(newPlayer);
   }
@@ -32,8 +30,14 @@ export class PlayersService {
     return { players };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} player`;
+  async getPlayerById(id: number) {
+    const player = await this.playerRepository.findOne({
+      where: { id },
+    });
+    if (!player) {
+      throw new HttpException('Player not found', HttpStatus.NOT_FOUND);
+    }
+    return player;
   }
 
   update(id: number, updatePlayerDto: UpdatePlayerDto) {

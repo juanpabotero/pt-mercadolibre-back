@@ -24,12 +24,12 @@ export class TeamService {
 
     const queryTraining = this.trainingRepository.createQueryBuilder();
     const training = await queryTraining
-      .select('COUNT(created_at), created_at')
+      .select('COUNT(created_at), created_at, training_id')
       .where('created_at BETWEEN :firstDayOfweek AND :lastDayOfWeek', {
         firstDayOfweek,
         lastDayOfWeek,
       })
-      .groupBy('created_at')
+      .groupBy('created_at, training_id')
       .orderBy('created_at', 'DESC')
       .getRawMany();
 
@@ -39,16 +39,17 @@ export class TeamService {
       return { message: 'There is not enough information' };
     }
 
-    const queryPlayers = this.trainingRepository.createQueryBuilder();
+    const queryPlayers = this.trainingRepository.createQueryBuilder('training');
     const players = await queryPlayers
       .select(
-        'COUNT(created_at), player_id AS id, MIN(name) AS name, created_at, MAX(score) AS score',
+        'COUNT(training_id), "playerId" as id, created_at, MAX(training.score) as score, MAX(players.name) as name',
       )
       .where('created_at BETWEEN :firstDayOfweek AND :lastDayOfWeek', {
         firstDayOfweek,
         lastDayOfWeek,
       })
-      .groupBy('created_at, player_id')
+      .innerJoin('training.player', 'players')
+      .groupBy('created_at, training_id, "playerId"')
       .orderBy('created_at', 'DESC')
       .getRawMany();
 
@@ -79,8 +80,7 @@ export class TeamService {
         continue;
       }
       const sum = scores.reduce((a, b) => +a + +b, 0);
-      const avg = sum / scores.length;
-      playersAverage[key] = avg;
+      playersAverage[key] = sum;
     }
 
     console.log('playersAverage', playersAverage);
@@ -93,9 +93,9 @@ export class TeamService {
 
     const topPlayersData = [];
 
-    topPlayers.forEach((player) => {
-      let playerData = players.find((p) => p.id === player);
-      playerData.score = playersAverage[player];
+    topPlayers.forEach((playerId) => {
+      let playerData = players.find((p) => p.id === +playerId);
+      playerData.score = playersAverage[playerId];
       const { count, created_at, id, ...rest } = playerData;
       playerData = { id: Number(id), ...rest };
       topPlayersData.push(playerData);

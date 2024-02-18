@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Training } from 'src/training/entities/training.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('players')
 export class Player {
@@ -8,6 +9,6 @@ export class Player {
   @Column({ type: 'text', unique: true })
   name: string;
 
-  @Column({ type: 'numeric', default: 0 })
-  score: number;
+  @OneToMany(() => Training, (training) => training.player)
+  training?: Training[];
 }

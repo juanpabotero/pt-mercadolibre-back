@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as moment from 'moment-timezone';
+import { randomUUID } from 'crypto';
+import { PlayersService } from 'src/players/players.service';
 import { Repository } from 'typeorm';
 import { PERCENTAGES } from '../shared/constants';
 import { CreateTrainingDto } from './dto/create-training.dto';
@@ -12,30 +13,37 @@ export class TrainingService {
   constructor(
     @InjectRepository(Training)
     private trainingRepository: Repository<Training>,
+    private playersServices: PlayersService,
   ) {}
 
   async createTraining(createTrainingDto: CreateTrainingDto) {
+    const trainingId = randomUUID();
     createTrainingDto.players.forEach(async (player) => {
-      const speed = this.caluclateSpeed(
+      const playerFound = await this.playersServices.getPlayerById(player.id);
+
+      const speed = this.calculateSpeed(
         +player.stats[0].speed.distance,
         +player.stats[0].speed.time,
       );
-
       player.score = this.calculateScore(
         +player.stats[0].power,
         speed,
         +player.stats[0].passes,
       );
 
-      const today = moment().utc().format('YYYY-MM-DD');
-      player.created_at = today;
-
-      const normalizedPlayer = {
-        player_id: player.id,
+      const newTraining = this.trainingRepository.create({
+        training_id: trainingId,
+        player: playerFound,
         ...player,
-      };
-      const newPlayer = this.trainingRepository.create(normalizedPlayer);
-      await this.trainingRepository.save(newPlayer);
+      });
+
+      // if (playerFound.training) {
+      //   playerFound.training = [...playerFound.training, newTraining];
+      // }
+
+      playerFound.training?.push(newTraining);
+
+      await this.trainingRepository.save(newTraining);
     });
     return { message: 'Training created successfully' };
   }
@@ -56,7 +64,7 @@ export class TrainingService {
     return `This action removes a #${id} training`;
   }
 
-  private caluclateSpeed(distance: number, time: number) {
+  private calculateSpeed(distance: number, time: number) {
     return distance / time;
   }
 
