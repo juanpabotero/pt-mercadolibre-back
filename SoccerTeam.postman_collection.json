@@ -1,0 +1,510 @@
+{
+	"info": {
+		"_postman_id": "6ea7e7f0-601a-4967-a16c-a5028b2b7ab0",
+		"name": "SoccerTeam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30948476"
+	},
+	"item": [
+		{
+			"name": "Get All players",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/players",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"players"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response ok",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/players",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"players"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "143"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8f-cc7Ig+WTkh/jecOzlAOYQexPbEU\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 19 Feb 2024 01:06:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"players\": [\n        {\n            \"id\": 11,\n            \"name\": \"Juan 1\"\n        },\n        {\n            \"id\": 12,\n            \"name\": \"Juan 2\"\n        },\n        {\n            \"id\": 23,\n            \"name\": \"Messi\"\n        },\n        {\n            \"id\": 24,\n            \"name\": \"Ronaldo\"\n        },\n        {\n            \"id\": 33,\n            \"name\": \"Neymar\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get player by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/players/11",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"players",
+						"11"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Reponse Ok",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/players/11",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"players",
+								"11"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"19-A6xHp1Y0K0mqEKPc3BbMvs3Gt4k\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 19 Feb 2024 01:03:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 11,\n    \"name\": \"Juan 1\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Team",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/team",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"team"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/team",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"team"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "93"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5d-D3VHAyadsr9Uuseh5Wq7JayEYVw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 Feb 2024 15:16:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"players\": [\n        {\n            \"id\": 12,\n            \"score\": 271.5,\n            \"name\": \"Juan 2\"\n        },\n        {\n            \"id\": 11,\n            \"score\": 215.4,\n            \"name\": \"Juan 1\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Create player",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Neymar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/players",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"players"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "response ok",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Neymar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/players",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"players"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"19-dMPb9Ej2HxNHAG3G61KmxXeyDwk\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 19 Feb 2024 01:06:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Neymar\",\n    \"id\": 33\n}"
+				}
+			]
+		},
+		{
+			"name": "Create training",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"players\": [\r\n        {\r\n            \"id\": 11,\r\n            \"name\": \"player 7\",\r\n            \"stats\": [\r\n                {\r\n                    \"power\": \"300\",\r\n                    \"speed\": {\r\n                        \"distance\": \"30\",\r\n                        \"time\": \"5\"\r\n                    },\r\n                    \"passes\": \"20\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": 12,\r\n            \"name\": \"player 8\",\r\n            \"stats\": [\r\n                {\r\n                    \"power\": \"400\",\r\n                    \"speed\": {\r\n                        \"distance\": \"40\",\r\n                        \"time\": \"4\"\r\n                    },\r\n                    \"passes\": \"15\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/training",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"training"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"players\": [\r\n        {\r\n            \"id\": 7,\r\n            \"name\": \"player 7\",\r\n            \"stats\": [\r\n                {\r\n                    \"power\": \"300\",\r\n                    \"speed\": {\r\n                        \"distance\": \"30\",\r\n                        \"time\": \"5\"\r\n                    },\r\n                    \"passes\": \"20\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"name\": \"player 8\",\r\n            \"stats\": [\r\n                {\r\n                    \"power\": \"400\",\r\n                    \"speed\": {\r\n                        \"distance\": \"40\",\r\n                        \"time\": \"4\"\r\n                    },\r\n                    \"passes\": \"15\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/training",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"training"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "43"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2b-aYueSfn0ql42ONCl3Hqu6PbQWQI\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 Feb 2024 20:22:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Training created successfully\"\n}"
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"players\": [\r\n        {\r\n            \"id\": 7,\r\n            \"name\": \"player 7\",\r\n            \"stats\": [\r\n                {\r\n                    \"power\": \"300\",\r\n                    \"speed\": {\r\n                        \"distance\": \"30\",\r\n                        \"time\": \"5\"\r\n                    }\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"name\": \"player 8\",\r\n            \"stats\": [\r\n                {\r\n                    \"power\": \"400\",\r\n                    \"speed\": {\r\n                        \"distance\": \"40\",\r\n                        \"time\": \"4\"\r\n                    },\r\n                    \"passes\": \"15\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/training",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"training"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "143"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8f-kHH5BwByQ1E1LoGv4T0RYdg2D0g\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 Feb 2024 20:22:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": [\n        \"players.0.stats.0.passes must be a string\",\n        \"players.0.stats.0.passes should not be empty\"\n    ],\n    \"error\": \"Bad Request\",\n    \"statusCode\": 400\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete player",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/players/26",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"players",
+						"26"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
