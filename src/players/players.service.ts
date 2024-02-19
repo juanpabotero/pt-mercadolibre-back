@@ -41,12 +41,13 @@ export class PlayersService {
     return player;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(id: number, updatePlayerDto: UpdatePlayerDto) {
     return `This action updates a #${id} player`;
   }
 
-  remove(id: number) {
-    this.trainingRepository.delete({ player: { id } });
+  async remove(id: number) {
+    await this.trainingRepository.delete({ player: { id } });
     return this.playerRepository.delete({ id });
   }
 }
