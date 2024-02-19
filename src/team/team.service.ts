@@ -64,9 +64,9 @@ export class TeamService {
     for (const key in playersScores) {
       const scores = playersScores[key];
       // If player has less than 3 scores, we skip it
-      if (scores.length < 3) {
-        continue;
-      }
+      // if (scores.length < 3) {
+      //   continue;
+      // }
       const sum = scores.reduce((a, b) => +a + +b, 0);
       playersAverage[key] = sum;
     }

@@ -10,5 +10,5 @@ export class Player {
   name: string;
 
   @OneToMany(() => Training, (training) => training.player)
-  training?: Training[];
+  training: Training[];
 }

@@ -4,11 +4,14 @@ import { Repository } from 'typeorm';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
 import { Player } from './entities/player.entity';
+import { Training } from 'src/training/entities/training.entity';
 
 @Injectable()
 export class PlayersService {
   constructor(
     @InjectRepository(Player) private playerRepository: Repository<Player>,
+    @InjectRepository(Training)
+    private trainingRepository: Repository<Training>,
   ) {}
 
   async createPlayer(createPlayerDto: CreatePlayerDto) {
@@ -43,6 +46,7 @@ export class PlayersService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} player`;
+    this.trainingRepository.delete({ player: { id } });
+    return this.playerRepository.delete({ id });
   }
 }
