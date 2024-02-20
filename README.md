@@ -42,4 +42,7 @@ Allí estan las instrucciones para levantar ese proyecto.
 ## Despliegue
 
 El proyecto se encuentra desplegado en Railway, se puede acceder a través de la siguiente
-URL: [SoccerTeamBack](https://pt-mercadolibre-back-production.up.railway.app/)
+URL: [SoccerTeamBack](https://pt-mercadolibre-back-production.up.railway.app/).
+
+Se usarían los mismos endpoints descritos anteriormente y que se encuentran en la colección de postman,
+solo se debería cambiar el `host` por la URL de Railway.
