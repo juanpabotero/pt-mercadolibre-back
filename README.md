@@ -3,7 +3,7 @@
 Se desarrolla la aplicación usando Nest.js (Framework de Node.js) y TypeORM.  
 Se utiliza una base de datos PostgreSQL y Docker para levantar la base de datos.
 
-## Instrucciones 
+## Instrucciones
 
 1. Clonar el proyecto
 2. Instalar las dependencias con `npm install`
@@ -16,10 +16,11 @@ Se utiliza una base de datos PostgreSQL y Docker para levantar la base de datos.
    la raíz del proyecto. (Los jugadores también se podrían crear desde el frontend).
 8. Importar en postman la colección `SoccerTeam.postman_collection.json` para probar los endpoints, se encuentra en
    la raíz del proyecto.
+   - Se deberia cambiar la variable `host` en la colección por el valor que se desea, por defecto es `http://localhost:3000`
    - Allí se encuentran ejemplos de los endpoints y sus respectivas respuestas.
 
 Se entrega un repositorio de Frontend en Angular que consume este backend. [SoccerTeamFront](https://github.com/juanpabotero/pt-mercadolibre-front).  
-Allí estan las instrucciones para levantar ese proyecto.  
+Allí estan las instrucciones para levantar ese proyecto.
 
 ## Endpoints
 
@@ -40,5 +41,5 @@ Allí estan las instrucciones para levantar ese proyecto.
 
 ## Despliegue
 
-El proyecto se encuentra desplegado en Railway, se puede acceder a través de la siguiente 
+El proyecto se encuentra desplegado en Railway, se puede acceder a través de la siguiente
 URL: [SoccerTeamBack](https://pt-mercadolibre-back-production.up.railway.app/)
