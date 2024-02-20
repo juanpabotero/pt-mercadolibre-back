@@ -42,7 +42,11 @@ Allí estan las instrucciones para levantar ese proyecto.
 ## Despliegue
 
 El proyecto se encuentra desplegado en Railway, se puede acceder a través de la siguiente
-URL: [SoccerTeamBack](https://pt-mercadolibre-back-production.up.railway.app/).
+URL: https://pt-mercadolibre-back-production.up.railway.app/
 
 Se usarían los mismos endpoints descritos anteriormente y que se encuentran en la colección de postman,
 solo se debería cambiar el `host` por la URL de Railway.
+
+El proyecto de frontend se encuentra desplegado en Vercel, se puede acceder a través de la siguiente
+URL: https://pt-mercadolibre-front.vercel.app/.  
+Este consume el backend desplegado en Railway.
