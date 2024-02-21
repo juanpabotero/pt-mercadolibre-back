@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
-import { PlayersService } from 'src/players/players.service';
+import { PlayersService } from '../players/players.service';
 import { Repository } from 'typeorm';
 import { PERCENTAGES } from '../shared/constants';
 import { CreateTrainingDto } from './dto/create-training.dto';

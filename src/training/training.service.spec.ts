@@ -1,11 +1,28 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import * as moment from 'moment-timezone';
+import { PlayersService } from '../players/players.service';
 import { Training } from './entities/training.entity';
 import { TrainingService } from './training.service';
 
 describe('TrainingService', () => {
   let service: TrainingService;
+
+  const mockPLayersService = {
+    createPlayer: jest.fn((dto) => ({
+      id: 1,
+      ...dto,
+    })),
+    findAllPlayers: jest.fn(() => ({
+      players: [],
+    })),
+    getPlayerById: jest.fn((id) => ({
+      id,
+      name: 'John Doe',
+    })),
+    remove: jest.fn(),
+  };
+
   const today = moment().utc().format('YYYY-MM-DD');
   const mockTrainingRepository = {
     create: jest.fn().mockImplementation((dto) => ({
@@ -25,12 +42,16 @@ describe('TrainingService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         TrainingService,
+        PlayersService,
         {
           provide: getRepositoryToken(Training),
           useValue: mockTrainingRepository,
         },
       ],
-    }).compile();
+    })
+      .overrideProvider(PlayersService)
+      .useValue(mockPLayersService)
+      .compile();
 
     service = module.get<TrainingService>(TrainingService);
   });

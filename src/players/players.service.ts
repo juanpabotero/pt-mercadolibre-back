@@ -1,10 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Training } from '../training/entities/training.entity';
 import { CreatePlayerDto } from './dto/create-player.dto';
-import { UpdatePlayerDto } from './dto/update-player.dto';
 import { Player } from './entities/player.entity';
-import { Training } from 'src/training/entities/training.entity';
 
 @Injectable()
 export class PlayersService {
@@ -39,11 +38,6 @@ export class PlayersService {
       throw new HttpException('Player not found', HttpStatus.NOT_FOUND);
     }
     return player;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  update(id: number, updatePlayerDto: UpdatePlayerDto) {
-    return `This action updates a #${id} player`;
   }
 
   async remove(id: number) {

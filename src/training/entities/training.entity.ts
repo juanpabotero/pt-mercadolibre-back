@@ -1,4 +1,4 @@
-import { Player } from 'src/players/entities/player.entity';
+import { Player } from '../../players/entities/player.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Stat } from '../interfaces/player.interface';
 
