@@ -13,7 +13,9 @@ async function bootstrap() {
     }),
   );
 
-  app.enableCors();
+  app.enableCors({
+    origin: ['https://pt-mercadolibre-front.vercel.app/team'],
+  });
 
   const port = process.env.PORT || 3000;
 
